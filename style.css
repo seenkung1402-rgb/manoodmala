@@ -1,30 +1,18 @@
-/* ========================= 
-   FONT : KINNARI
-========================= */
 @font-face {
   font-family: 'Kinnari';
   src: url('fonts/Kinnari.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }
 
-/* =========================
-   GLOBAL
-========================= */
 body {
   margin: 0;
 }
 
-/* =========================
-   PROJECTOR PAGE
-========================= */
 .projector-page {
   height: 100vh;
   overflow: hidden;
   font-family: 'Kinnari', serif;
 }
 
-/* วิดีโอพื้นหลัง */
 #bgVideo {
   position: fixed;
   inset: 0;
@@ -35,7 +23,6 @@ body {
   filter: brightness(0.6);
 }
 
-/* ผนัง */
 #wall {
   position: relative;
   width: 100%;
@@ -43,150 +30,145 @@ body {
 }
 
 /* =========================
-   MESSAGE (PROJECTOR)
+   MESSAGE
 ========================= */
 .message {
   position: absolute;
-  font-size: 46px;
   color: #ffffff;
-  white-space: nowrap;
-  pointer-events: none;
   font-style: italic;
-  
+  pointer-events: none;
+
+  /* ✅ ตัดบรรทัด */
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  /* ✅ กันล้นจอ */
+  max-width: 80vw;
+  text-align: center;
   line-height: 1.4;
-  padding: 4px 6px;
 
-
-
-  /* นีออนขาว */
+  /* นีออน */
   text-shadow:
-    0 0 6px rgba(255,255,255,0.8),
-    0 0 12px rgba(255,255,255,0.6),
-    0 0 22px rgba(255,255,255,0.5),
-    0 0 36px rgba(200,220,255,0.4);
+    0 0 8px rgba(255,255,255,0.9),
+    0 0 18px rgba(255,255,255,0.7),
+    0 0 36px rgba(200,220,255,0.6);
 
-  /* ❗ transition แค่ opacity */
-  transition: opacity 2.5s ease;
+  transition:
+    opacity 2.5s ease,
+    transform 2.5s ease;
 }
 
-/* wave animation (แรงขึ้น เห็นชัด) */
-@keyframes waterWave {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  20% {
-    transform: translateY(-6px) rotate(-0.6deg);
-  }
-  50% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  80% {
-    transform: translateY(6px) rotate(0.6deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
+/* =========================
+   CENTER (ตอนพิมพ์)
+========================= */
+.message.center {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 1;
 }
 
-.background {
+/* =========================
+   BACKGROUND (หลังโผล่)
+========================= */
+.message.background {
   animation: waterWave 4s ease-in-out infinite;
-  opacity: 0.75;
 }
 
-/* จางหาย */
+/* =========================
+   WAVE (แรงขึ้น)
+========================= */
+@keyframes waterWave {
+  0%   { transform: translateY(0px) scale(0.8); }
+  25%  { transform: translateY(-6px) scale(0.82); }
+  50%  { transform: translateY(0px) scale(0.8); }
+  75%  { transform: translateY(6px) scale(0.82); }
+  100% { transform: translateY(0px) scale(0.8); }
+}
+
+/* =========================
+   FADE OUT
+========================= */
 .fadeout {
   transition: opacity 20s linear;
   opacity: 0;
 }
+/* =====================================================
+   GLOBAL FIX (มือถือเต็มจอจริง)
+===================================================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none;
+}
 
 /* =====================================================
-   MESSAGE PAGE (หน้าลูกค้า)
+   MESSAGE PAGE (หน้าส่งข้อความ)
 ===================================================== */
 .message-page {
-  height: 100vh;
+  height: 100dvh;              /* ✅ เต็มจอมือถือจริง */
+  width: 100vw;
   background: url("img/BG.png") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
-/* โลโก้ */
+/* โลโก้ (ถ้ามี) */
 .logo {
   position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 110px;
+  top: 16px;
+  right: 16px;
+  width: 96px;
 }
 
 /* กล่องรวม */
 .send-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* กล่องขาว */
+.white-box {
+  width: 92vw;
+  max-width: 520px;
+  height: 60dvh;               /* ⬅️ กล่องสูงขึ้น */
+  border-radius: 22px;
+  padding: 22px;
+  background: rgba(255,255,255,0.96);
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-/* กรอบใส */
-.glass-box {
-  padding: 14px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.22);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-}
-
-/* กล่องขาวใหญ่ */
-.white-box {
-  width: 520px;
-  border-radius: 22px;
-  padding: 28px;
-  background: rgba(255,255,255,0.96);
-}
-
-/* textarea */
+/* textarea พิมพ์สบาย */
 .white-box textarea {
+  flex: 1;
   width: 100%;
-  height: 200px;
   resize: none;
   border: none;
   outline: none;
   background: transparent;
-  font-size: 22px;
-  line-height: 1.5;
+  font-size: 20px;
+  line-height: 1.6;
   font-family: sans-serif;
   color: #333;
 }
 
-/* ปุ่มหัวใจ */
+/* ปุ่มส่ง */
 .heart-btn {
-  margin-top: 18px;
-  font-size: 56px;
+  margin-top: 12px;
+  font-size: 52px;
   background: none;
   border: none;
   cursor: pointer;
+  align-self: center;
 }
 
 .heart-btn:active {
   transform: scale(0.9);
-}
-
-/* สถานะ */
-.send-status {
-  margin-top: 6px;
-  font-size: 15px;
-  color: #222;
-}
-
-/* มือถือ */
-@media (max-width: 600px) {
-  .white-box {
-    width: 90vw;
-    padding: 20px;
-  }
-
-  .white-box textarea {
-    height: 160px;
-    font-size: 18px;
-  }
 }

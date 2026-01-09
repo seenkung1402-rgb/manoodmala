@@ -104,58 +104,50 @@ if (wall) {
   });
 }
 
-// =====================================================
-// TYPE CENTER
-// =====================================================
 async function typeCenter(text) {
   const el = document.createElement("div");
   el.className = "message center";
   el.innerText = "";
 
-  el.style.left = "50%";
-  el.style.top = "50%";
-  el.style.transform = "translate(-50%, -50%) scale(1.1)";
-  el.style.opacity = "1";
+  el.style.fontSize = autoFontSize(text);
 
   wall.appendChild(el);
 
   const total = 2000;
-  const delay = Math.max(20, total / text.length);
+  const delay = Math.max(25, total / text.length);
 
   for (let c of text) {
     el.innerText += c;
     await sleep(delay);
   }
+
   return el;
 }
+
 
 function spawnStaticBackground(el) {
   const pos = getSafePosition();
 
-  // 🔒 ปิด transition ชั่วคราว
   el.style.transition = "none";
-
-  // teleport ไปตำแหน่งปลายทาง (ตอนมองไม่เห็น)
   el.classList.remove("center");
   el.classList.add("background");
 
   el.style.left = pos.left;
   el.style.top = pos.top;
   el.style.opacity = "0";
-
+  el.style.transform = "scale(0.8)";
   el.dataset.posKey = pos.key;
 
-  // fade in อย่างเดียว
   requestAnimationFrame(() => {
     el.style.transition = "opacity 3s ease";
     el.style.opacity = "0.75";
   });
 
-  // ✅ คืน animation ให้ CSS (สำคัญมาก)
   setTimeout(() => {
     el.style.transition = "";
   }, 3100);
 }
+
 
 
 // =====================================================
@@ -178,4 +170,13 @@ async function loopBackground(el) {
 // =====================================================
 function sleep(ms) {
   return new Promise(r => setTimeout(r, ms));
+}
+function autoFontSize(text) {
+  const len = text.length;
+
+  if (len <= 20) return "64px";   // สั้น → ใหญ่มาก
+  if (len <= 40) return "54px";
+  if (len <= 60) return "46px";
+  if (len <= 90) return "40px";
+  return "34px";                 // ยาว → เล็กลง
 }
