@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>ส่งข้อความถึงร้าน</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="message-page">
+
+  <!-- โลโก้มุมขวาบน -->
+  <img src="img/logo.png" class="logo" alt="logo">
+
+  <!-- กล่องรวม -->
+  <div class="send-wrapper">
+
+    <!-- กรอบใส -->
+    <div class="glass-box">
+      <!-- กล่องขาวใหญ่ -->
+      <div class="white-box">
+        <textarea
+          id="messageInput"
+          maxlength="500"
+          placeholder="มีอะไรอยากบอกไหม"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- ปุ่มหัวใจ -->
+    <button id="sendBtn" class="heart-btn">❤️</button>
+
+    <!-- สถานะ -->
+    <div id="status" class="send-status"></div>
+
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>

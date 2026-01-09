@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Message Wall</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="projector-page">
+
+  <!-- วิดีโอพื้นหลัง -->
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="video/bgg.mp4" type="video/mp4">
+  </video>
+
+  <!-- ผนังข้อความ -->
+  <div id="wall"></div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
